@@ -1,0 +1,58 @@
+<div *ngIf="currentAccount" class="edit-form">
+  <h4>Account</h4>
+  <form>
+    <div class="form-group">
+      <label for="nickname">Nickname</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nickname"
+        [(ngModel)]="currentAccount.nickname"
+        name="nickname"
+      />
+    </div>
+    <div class="form-group">
+      <label for="balance">Balance</label>
+      <input
+        type="text"
+        class="form-control"
+        id="balance"
+        [(ngModel)]="currentAccount.balance"
+        name="balance"
+      />
+    </div>
+    <div class="form-group">
+      <label><strong>Status:</strong></label>
+      {{ currentAccount.status ? "Active" : "Inactive" }}
+    </div>
+  </form>
+
+  <button
+    class="badge badge-primary mr-2"
+    *ngIf="currentAccount.status"
+    (click)="updateStatus(false)"
+  >
+    Deactivate
+  </button>
+  <button
+    *ngIf="!currentAccount.status"
+    class="badge badge-primary mr-2"
+    (click)="updateStatus(true)"
+  >
+    Activate
+  </button>
+
+  <button class="badge badge-danger mr-2" (click)="deleteAccount()">
+    Delete
+  </button>
+
+  <button type="submit" class="badge badge-success" (click)="updateAccount()">
+    Update
+  </button>
+  <p>{{ message }}</p>
+</div>
+
+<div *ngIf="!currentAccount">
+  <br />
+  <p>Cannot access this Account...</p>
+</div>
